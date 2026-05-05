@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for Rizzel</title>
+    <style>
+        body {
+            /* Changed to a softer, lighter lavender gradient */
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); 
+            color: #4a148c;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(123, 31, 162, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid white;
+        }
+
+        button {
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .btn-yes {
+            background-color: #9c27b0; /* Softer Purple */
+            color: white;
+            z-index: 100;
+            position: relative;
+        }
+
+        .btn-no {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+            border: 1px solid #ce93d8;
+            margin-left: 10px;
+        }
+
+        .hidden-step {
+            display: none;
+            animation: fadeIn 1s forwards;
+        }
+
+        .content-box {
+            background: white;
+            color: #4a148c;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .flower-img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        <!-- STEP 1: THE ASK -->
+        <div id="step-1">
+            <h2 style="color: #7b1fa2;">do you want to hear a joke?</h2>
+            <div style="margin-top: 30px;">
+                <button class="btn-yes" onclick="showStep(2)">yes i</button>
+                <button id="no-button" class="btn-no" onmouseover="moveButton()" onclick="moveButton()">ayoko</button>
+            </div>
+        </div>
+
+        <!-- STEP 2: THE QUESTION -->
+        <div id="step-2" class="hidden-step">
+            <h2 style="color: #7b1fa2;">why are pirates called pirates?</h2>
+            <button class="btn-yes" style="background: #ba68c8;" onclick="showStep(3)">why?</button>
+        </div>
+
+        <!-- STEP 3: THE PUNCHLINE -->
+        <div id="step-3" class="hidden-step">
+            <div class="content-box">
+                <p style="font-size: 1.2rem;"><strong>becaause they arrrrr</strong></p>
+                <p id="teasing-msg" style="display: none; font-style: italic; color: #9c27b0; font-size: 0.9rem; margin-top: 10px;">
+                    (ok i know d ka tumawa ...)
+                </p>
+            </div>
+            <button id="flower-trigger" class="btn-yes" style="margin-top: 20px; display: none;" onclick="showStep(4)">
+                anyway...
+            </button>
+        </div>
+
+        <!-- STEP 4: THE FLOWERS -->
+        <div id="step-4" class="hidden-step">
+            <h2 style="font-size: 1.1rem; color: #7b1fa2;"> for my bebi :)</h2>
+            <img src="Untitled design.png" class="flower-img" alt="flowers for u!">
+            <div class="content-box" style="border-left: 8px solid #ba68c8; text-align: left;">
+                <p>"i know the joke was corny, but I hope these make you hapi! my strong girl :') thank u for being u. i love you — more than you know."</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('no-button');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function showStep(stepNumber) {
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-3').style.display = 'none';
+            
+            const nextStep = document.getElementById('step-' + stepNumber);
+            nextStep.style.display = 'block';
+
+            if (stepNumber === 3) {
+                setTimeout(() => {
+                    document.getElementById('teasing-msg').style.display = 'block';
+                }, 1500);
+                setTimeout(() => {
+                    document.getElementById('flower-trigger').style.display = 'inline-block';
+                }, 3500);
+            }
+        }
+    </script>
+
+</body>
+</html>
